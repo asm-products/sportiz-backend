@@ -1,0 +1,42 @@
+{
+  "dependencies": {
+    "async": "latest",
+    "body-parser": "latest",
+    "compression": "latest",
+    "connect-mongo": "latest",
+    "cookie-parser": "latest",
+    "errorhandler": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "http-post": "~0.1.1",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "mongoose-rbac": "~0.1.0",
+    "morgan": "latest",
+    "mstring": "^0.1.2",
+    "multer": "^0.1.0",
+    "passport": "latest",
+    "passport-facebook": "latest",
+    "passport-local": "latest",
+    "passport-local-mongoose": "latest",
+    "serve-favicon": "latest",
+    "superagent": "^0.19.0",
+    "underscore": "latest"
+  },
+  "devDependencies": {
+    "mocha": "latest",
+    "chai": "latest",
+    "should": "latest",
+    "supertest": "latest"
+  },
+  "name": "sportiz",
+  "subdomain": "sportiz",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha"
+  },
+  "version": "0.0.1",
+  "engines": {
+    "node": "0.8.x"
+  }
+}
