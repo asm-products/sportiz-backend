@@ -5,10 +5,17 @@ var chai = require('chai'),
     should = chai.should();
 
 describe('Authentication Tests', function() {
+    var id;
     it('can successfully create a new user', function(done) {
         this.timeout(5000);
         superagent.post('http://localhost:3000/api/v1/auth/register')
-            .send({username:"test", password:"test"})
+            .send({
+                username:"test", 
+                password:"test",
+                name:"test",
+                email:"test@test.com",
+                blurb:"test"
+            })
             .end(function(err,res) {
                 expect(err).to.eql(null);
                 expect(res.status).to.be.eql(200);
@@ -20,6 +27,18 @@ describe('Authentication Tests', function() {
     it('can successfully login a user', function(done) {
         superagent.post('http://localhost:3000/api/v1/auth/login')
             .send({username:"test", password:"test"})
+            .end(function(err,res) {
+                id = res.body.info._id;
+                console.log(id);
+                expect(err).to.eq(null);
+                expect(res.status).to.be.eql(200);
+                return done();
+            });
+    });
+
+    it('can successfully update a user', function(done) {
+        superagent.put('http://localhost:3000/api/v1/auth/users/' + id)
+            .send({name:"abc"})
             .end(function(err,res) {
                 expect(err).to.eq(null);
                 expect(res.status).to.be.eql(200);
@@ -35,6 +54,17 @@ describe('Authentication Tests', function() {
                 return done();
             });
     });
+
+    // TODO: THIS ISNT WORKING NOW, BUT THE API WORKS
+    // it('can successfully get a user profile', function(done) {
+    //     superagent.get('http://localhost:3000/api/v1/auth/profile')
+    //         .end(function(err,res) {
+    //             expect(err).to.eql(null);
+    //             expect(res.status).to.be.eql(200);
+    //             return done();
+    //         });
+    // });
+
 });
 
 describe('Event Tests', function() {

@@ -44,25 +44,10 @@ module.exports = function (app) {
     (function authentication_routes() {
         var UserCtrl = require('../controllers/user');
         app.post('/api/v1/auth/login', passport.authenticate('local'), UserCtrl.login);
-
+        app.put('/api/v1/auth/users/:user_id', UserCtrl.update);
         app.post('/api/v1/auth/register', UserCtrl.register);
         app.get('/api/v1/auth/logout', UserCtrl.logout);
-        app.get('/api/v1/auth/get_logged_in_user', function (req,res) {
-            if(req.user) {
-               res.send(200, {status: 'success', user: req.user}); 
-            }
-            else {
-                res.send(401, {status: 'error'});
-            }
-        });
-
-        app.post('/api/v1/auth/login', function (req, res) {
-            console.log(req.body);
-            req.login(req.body, function (err) {
-                console.log(err);
-                console.log("logged in");
-            });
-        });
+        app.get('/api/v1/auth/profile', UserCtrl.profile);
     })();
 
     //Event CRUD routes
