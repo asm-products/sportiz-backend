@@ -69,6 +69,7 @@ module.exports = function (app) {
     (function event_routes() {
         var EventCtrl = require('../controllers/event');
         app.get('/api/v1/events', EventCtrl.getAllEvents);
+        app.post('/api/v1/events', EventCtrl.create);
     })();
 
 

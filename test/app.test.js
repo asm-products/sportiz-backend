@@ -5,7 +5,6 @@ var chai = require('chai'),
     should = chai.should();
 
 describe('Authentication Tests', function() {
-
     it('can successfully create a new user', function(done) {
         this.timeout(5000);
         superagent.post('http://localhost:3000/api/v1/auth/register')
@@ -13,7 +12,7 @@ describe('Authentication Tests', function() {
             .end(function(err,res) {
                 expect(err).to.eql(null);
                 expect(res.status).to.be.eql(200);
-                expect(res.body._id).to.not.be.eql(null);
+                expect(res.body.info._id).to.not.be.eql(null);
                 return done();                
             });
     });
@@ -35,6 +34,29 @@ describe('Authentication Tests', function() {
                 expect(res.status).to.be.eql(200);
                 return done();
             });
+    });
+});
+
+describe('Event Tests', function() {
+    it('can successfully create a new event', function(done) {
+        this.timeout(5000);
+        superagent.post('http://localhost:3000/api/v1/events')
+            .send({name:"test event"})
+            .end(function(err,res) {
+                expect(err).to.eql(null);
+                expect(res.status).to.be.eql(200);
+                expect(res.body.info._id).to.not.be.eql(null);
+                return done();                
+            });
+    });
+
+    it('can successfully get all events', function(done) {
+        superagent.get('http://localhost:3000/api/v1/events')
+            .end(function(err,res) {
+                expect(err).to.eql(null);
+                expect(res.status).to.be.eql(200);
+                return done();
+            })
     });
 
 });

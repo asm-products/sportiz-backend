@@ -5,8 +5,10 @@ var mongoose = require('mongoose'),
 
 var Event = new Schema({
     name: String,
-    location: String,
     description: String,
+    location: String,
+    when: Date,
+    created_by: {type: Schema.ObjectId, ref: 'Account'},
     created_at: {type: Date, default: Date.now},
     modified_at: {type: Date, default: Date.now}
 });
