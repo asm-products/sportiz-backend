@@ -14,7 +14,7 @@ var express = require('express'),
     multer  = require('multer'),
     MongoStore = require('connect-mongo')(session);
 
-var Account = require('../models/account');
+var User = require('../models/user');
 
 var Settings = require('./settings');
 var env_config = Settings.values.config[Settings.values.env];
@@ -49,9 +49,9 @@ module.exports = function(app) {
         return next();
     });
 
-    passport.use(new LocalStrategy(Account.authenticate()));
-    passport.serializeUser(Account.serializeUser());
-    passport.deserializeUser(Account.deserializeUser());
+    passport.use(new LocalStrategy(User.authenticate()));
+    passport.serializeUser(User.serializeUser());
+    passport.deserializeUser(User.deserializeUser());
 
     app.use(errorhandler({
         dumpExceptions: true,

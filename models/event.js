@@ -8,7 +8,7 @@ var Event = new Schema({
     description: String,
     location: String,
     when: Date,
-    created_by: {type: Schema.ObjectId, ref: 'Account'},
+    created_by: {type: Schema.ObjectId, ref: 'User'},
     created_at: {type: Date, default: Date.now},
     modified_at: {type: Date, default: Date.now}
 });

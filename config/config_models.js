@@ -4,14 +4,14 @@ var Schema = mongoose.Schema;
 
 module.exports = function () {
     var models = [
-        'account', 'event'
+        'user', 'event'
     ];
 
     models.forEach(function (m) {
         var model = require('../models/' + m);
     });
 
-    mongoose.model('Account').schema.add({
-        account: {type: Schema.ObjectId, ref: 'Account'}
+    mongoose.model('User').schema.add({
+        user: {type: Schema.ObjectId, ref: 'User'}
     });
 };

@@ -42,11 +42,11 @@ module.exports = function (app) {
 
     //Register user and login as well as other auth routes
     (function authentication_routes() {
-        var AccountCtrl = require('../controllers/account');
-        app.post('/api/v1/auth/login', passport.authenticate('local'), AccountCtrl.login);
+        var UserCtrl = require('../controllers/user');
+        app.post('/api/v1/auth/login', passport.authenticate('local'), UserCtrl.login);
 
-        app.post('/api/v1/auth/register', AccountCtrl.register);
-        app.get('/api/v1/auth/logout', AccountCtrl.logout);
+        app.post('/api/v1/auth/register', UserCtrl.register);
+        app.get('/api/v1/auth/logout', UserCtrl.logout);
         app.get('/api/v1/auth/get_logged_in_user', function (req,res) {
             if(req.user) {
                res.send(200, {status: 'success', user: req.user}); 
