@@ -27,11 +27,11 @@ var Event = new Schema({
     },
     subscribers: [{type: Schema.ObjectId, ref: 'User'}],
     score: String,
-    comments: {
+    comments: [{
     	comment: String,
-    	on: Date,
+    	commented_on: Date,
     	by: {type: Schema.ObjectId, ref: 'User'}
-    },
+    }],
     created_at: {type: Date, default: Date.now},
     modified_at: {type: Date, default: Date.now}
 });
