@@ -53,8 +53,15 @@ module.exports = function (app) {
     //Event CRUD routes
     (function event_routes() {
         var EventCtrl = require('../controllers/event');
-        app.get('/api/v1/events', EventCtrl.getAllEvents);
+        app.get('/api/v1/events', EventCtrl.all);
+        app.get('/api/v1/events/:event_id', EventCtrl.get)
         app.post('/api/v1/events', EventCtrl.create);
+        app.put('/api/v1/events/:event_id', EventCtrl.update);
+        app.del('/api/v1/events/:event_id', EventCtrl.remove)
+        app.get('/api/v1/events/subscribe/:event_id', EventCtrl.subscribe);
+        app.post('/api/v1/events/:event_id/invite/', EventCtrl.invite);
+        app.post('/api/v1/events/:event_id/score', EventCtrl.score);
+        app.post('/api/v1/events/:event_id/comments', EventCtrl.comment);
     })();
 
 

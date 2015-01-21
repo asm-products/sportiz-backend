@@ -68,11 +68,16 @@ describe('Authentication Tests', function() {
 });
 
 describe('Event Tests', function() {
+    var id = '';
+    var event = null;
+
     it('can successfully create a new event', function(done) {
         this.timeout(5000);
         superagent.post('http://localhost:3000/api/v1/events')
             .send({name:"test event"})
             .end(function(err,res) {
+                event = res.body.info;
+                id = res.body.info._id;
                 expect(err).to.eql(null);
                 expect(res.status).to.be.eql(200);
                 expect(res.body.info._id).to.not.be.eql(null);
@@ -89,5 +94,34 @@ describe('Event Tests', function() {
             })
     });
 
+    it('can successfully get an event', function(done) {
+        superagent.get('http://localhost:3000/api/v1/events/' + id)
+            .end(function(err,res) {
+                expect(err).to.eql(null);
+                expect(res.status).to.be.eql(200);
+                return done();
+            })
+    });    
+
+
+    it('can successfully update an event', function(done) {
+        event.name = "abc";
+        superagent.put('http://localhost:3000/api/v1/events/' + id)
+            .send(event)
+            .end(function(err,res) {
+                expect(err).to.eq(null);
+                expect(res.status).to.be.eql(200);
+                return done();
+            });
+    });
+
+    it('can successfully delete an event', function(done) {
+        superagent.del('http://localhost:3000/api/v1/events/' + id)
+            .end(function(err,res) {
+                expect(err).to.eq(null);
+                expect(res.status).to.be.eql(200);
+                return done();
+            });
+    });    
 });
 
