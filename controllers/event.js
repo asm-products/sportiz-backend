@@ -66,15 +66,12 @@ module.exports.create = function(req, res) {
 
 module.exports.update = function(req, res) {
     var updated_event = {};
-    var to_be_updated = '';
-
     updated_event = _.extend(updated_event, req.body);
-    to_be_updated = updated_event._id;
     delete updated_event._id;
     delete updated_event.__v;
     updated_event.modified_at = Date.now();
     Event.findOneAndUpdate({
-            _id: to_be_updated
+            _id: req.params.event_id
         }, {
             $set: updated_event
         }, {

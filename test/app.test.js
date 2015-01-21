@@ -29,7 +29,6 @@ describe('Authentication Tests', function() {
             .send({username:"test", password:"test"})
             .end(function(err,res) {
                 id = res.body.info._id;
-                console.log(id);
                 expect(err).to.eq(null);
                 expect(res.status).to.be.eql(200);
                 return done();
