@@ -11,7 +11,7 @@ module.exports = function (app) {
                 next();
             } else {
                 res.send(401, {'status': 'error',
-                    'message': 'We got an Authentication Faliure. Try logging in again.',
+                    'message': 'Authentication Faliure. Try logging in again.',
                     'info': ''});
             }
         };
@@ -53,8 +53,15 @@ module.exports = function (app) {
     //Event CRUD routes
     (function event_routes() {
         var EventCtrl = require('../controllers/event');
-        app.get('/api/v1/events', EventCtrl.getAllEvents);
-        app.post('/api/v1/events', EventCtrl.create);
+        app.get('/api/v1/events', EventCtrl.all);
+        app.get('/api/v1/events/:event_id', EventCtrl.get)
+        app.post('/api/v1/events', checkAuthenticated(), EventCtrl.create);
+        app.put('/api/v1/events/:event_id', checkAuthenticated(), EventCtrl.update);
+        app.del('/api/v1/events/:event_id', checkAuthenticated(), EventCtrl.remove)
+        app.get('/api/v1/events/:event_id/subscribe', checkAuthenticated(), EventCtrl.subscribe);
+        app.post('/api/v1/events/:event_id/invite', checkAuthenticated(), EventCtrl.invite);
+        app.post('/api/v1/events/:event_id/score', checkAuthenticated(), EventCtrl.score);
+        app.post('/api/v1/events/:event_id/comment', checkAuthenticated(), EventCtrl.comment);
     })();
 
 
